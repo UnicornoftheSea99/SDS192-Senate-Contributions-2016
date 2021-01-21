@@ -2,7 +2,7 @@
 title: "Put a real title here"
 subtitle: "SDS 192: MP2"
 author: 
-- name: Author One
+- name: Julia Walker
   affiliation: Smith College
 - name: Author Two
   affiliation: Smith College

@@ -129,7 +129,7 @@ contributions %>%
 
 
 ```{r}
-contributions_all <- read_all_contributions()
+#contributions_all <- read_all_contributions()
 #candidates <- candidates
 cali_candidates <- candidates %>%
   filter(cand_office_st=="CA" & cand_office == "S") 
@@ -140,9 +140,9 @@ comm_cand <- cali_candidates %>%
 ggplot(data = comm_cand, aes(x= cand_name, y=transaction_amt, fill=transaction_tp))+
 geom_bar(stat='identity')+
   coord_flip()+
-  xlab("Transaction Amount")+
-  ylab("Candidate Name")+
-  labs(fill = "Transaction Type")+
+  xlab("Candidate Name")+
+  ylab("Transaction Amount")+
+  labs(fill = "Transaction Type")
   #theme(legend.position="bottom")
 ```
 

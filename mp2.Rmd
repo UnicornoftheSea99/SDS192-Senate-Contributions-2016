@@ -87,50 +87,8 @@ contributions_all <- read_all_contributions()
 ```
 
 
-## Some basic EDA
-
-Here are some basic examples of what you can do.
-
-- How many candidates running for what offices?
-
 ```{r}
-candidates %>%
-  group_by(cand_election_yr, cand_office, cand_office_st) %>%
-  summarize(num_candidates = n()) %>%
-  arrange(desc(num_candidates))
-```
-
-- How many committees [by type](https://classic.fec.gov/finance/disclosure/metadata/CommitteeTypeCodes.shtml)?
-
-```{r}
-committees %>%
-  group_by(cmte_tp) %>%
-  summarize(
-    num_committees = n(), 
-    cand_ids = sum(!is.na(cand_id))
-  ) %>%
-  arrange(desc(num_committees))
-```
-
-- What types of contributions are there and where do they go?
-
-Remember that `contributions` is just a sample!
-
-```{r}
-contributions %>%
-  group_by(entity_tp) %>%
-  summarize(
-    num_contributions = n(), 
-    total_amount = sum(transaction_amt), 
-    other_ids = sum(!is.na(other_id)),
-    cand_ids = sum(!is.na(cand_id))
-  ) %>%
-  arrange(desc(num_contributions))
-```
-
-
-```{r}
-#contributions_all <- read_all_contributions()
+contributions_all <- read_all_contributions()
 #candidates <- candidates
 cali_candidates <- candidates %>%
   filter(cand_office_st=="CA" & cand_office == "S") 
@@ -149,8 +107,7 @@ geom_bar(stat='identity')+
   xlab("Candidate Name")+
    theme(legend.position=c(0.8, 0.8))+
   coord_flip()
-  #scale_y_discrete(limits = c("0", "500000", "1000000"))+
-  #scale_y_log10()+
+  
   
   
 ```

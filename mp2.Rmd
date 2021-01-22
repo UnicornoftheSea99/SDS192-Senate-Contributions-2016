@@ -128,14 +128,16 @@ contributions %>%
 ```
 
 ```{r}
-#contributions_all <- read_all_contributions()
-candidates <- candidates
+contributions_all <- read_all_contributions()
+#candidates <- candidates
 cali_candidates <- candidates %>%
   filter(cand_office_st=="CA" & cand_office == "S") 
 comm_cand <- cali_candidates %>%
   inner_join(contributions_all, by=c("cand_id"="cand_id"))%>%
   filter(transaction_tp=="24A" | transaction_tp=="24E")
 
+ggplot(data = comm_cand, aes(x= cand_name, y=transaction_amt, fill=transaction_tp))+
+geom_bar(stat='identity')
 ```
 
 
@@ -167,3 +169,5 @@ In this assignment, we attempted the following [standards](https://beanumber.git
 - `r standard_button("ethics")`: We mastered the Ethics standard because we...
 
 ## References
+https://ballotpedia.org/United_States_Senate_election_in_California,_2016
+https://www.reuters.com/article/us-usa-election-california-senate/california-poised-to-shut-out-republicans-from-u-s-senate-race-idUSKCN0YT16J

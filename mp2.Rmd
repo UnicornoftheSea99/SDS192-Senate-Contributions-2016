@@ -130,12 +130,20 @@ nv_money <- nevada_candidates %>%
   select(cand_name, cand_pty_affiliation, cand_election_yr, cand_office, transaction_tp, transaction_amt)
 dim(nv_money)
 
+# how many transactions of each type
 nv_money %>%
   group_by(transaction_tp) %>%
   summarize(num_transactions = n())
 
+# how many candidates
 nv_money %>% 
   summarize(num_candidates = n_distinct(cand_name))
+```
+
+```{r}
+ggplot(data = nv_money, aes(x= cand_name, y=transaction_amt, fill=transaction_tp))+
+  geom_bar(stat='identity') +
+  coord_flip()
 ```
 
 ## Analysis
@@ -171,3 +179,4 @@ https://www.reuters.com/article/us-usa-election-california-senate/california-poi
 https://stackoverflow.com/questions/61068031/error-stat-count-can-only-have-an-x-or-y-aesthetic
 http://www.sthda.com/english/wiki/ggplot2-axis-scales-and-transformations
 https://stackoverflow.com/questions/38788357/change-bar-plot-colour-in-geom-bar-with-ggplot2-in-r
+https://ballotpedia.org/United_States_Senate_election_in_Nevada,_2016

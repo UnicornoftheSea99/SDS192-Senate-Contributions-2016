@@ -138,7 +138,12 @@ comm_cand <- cali_candidates %>%
   filter(transaction_tp=="24A" | transaction_tp=="24E")
 
 ggplot(data = comm_cand, aes(x= cand_name, y=transaction_amt, fill=transaction_tp))+
-geom_bar(stat='identity')
+geom_bar(stat='identity')+
+  coord_flip()+
+  xlab("Transaction Amount")+
+  ylab("Candidate Name")+
+  labs(fill = "Transaction Type")+
+  #theme(legend.position="bottom")
 ```
 
 
@@ -172,3 +177,4 @@ In this assignment, we attempted the following [standards](https://beanumber.git
 ## References
 https://ballotpedia.org/United_States_Senate_election_in_California,_2016
 https://www.reuters.com/article/us-usa-election-california-senate/california-poised-to-shut-out-republicans-from-u-s-senate-race-idUSKCN0YT16J
+https://stackoverflow.com/questions/61068031/error-stat-count-can-only-have-an-x-or-y-aesthetic

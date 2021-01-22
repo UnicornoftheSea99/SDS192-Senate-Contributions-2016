@@ -98,10 +98,11 @@ comm_cand <- cali_candidates %>%
 ```
 
 ```{r}
-# how many transactions of each type
+# what do transactions look like
 comm_cand %>%
   group_by(transaction_tp) %>%
-  summarize(num_transactions = n())
+  summarize(num_transactions = n(),
+            transaction_total = sum(transaction_amt))
 
 # how many candidates
 comm_cand %>%
@@ -136,10 +137,10 @@ dim(nv_money)
 ```
 
 ```{r}
-# how many transactions of each type
+# what do transactions look like
 nv_money %>%
   group_by(transaction_tp) %>%
-  summarize(num_transactions = n())
+  summarize(num_transactions = n(), transaction_total = sum(transaction_amt))
 
 # how many candidates
 nv_money %>% 

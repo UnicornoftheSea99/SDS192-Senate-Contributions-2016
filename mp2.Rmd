@@ -128,7 +128,7 @@ contributions %>%
 ```
 
 ```{r}
-contributions_all <- read_all_contributions()
+#contributions_all <- read_all_contributions()
 candidates <- candidates
 cali_candidates <- candidates %>%
   filter(cand_office_st=="CA" & cand_office == "S") 

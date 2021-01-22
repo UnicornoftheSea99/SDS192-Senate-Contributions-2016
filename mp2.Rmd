@@ -131,7 +131,7 @@ contributions %>%
 contributions <- contributions
 candidates <- candidates
 cali_candidates <- candidates %>%
-  filter(cand_office_st=="CA")
+  filter(cand_office_st=="CA" & cand_office == "S") 
 ```
 
 

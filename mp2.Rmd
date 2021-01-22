@@ -99,6 +99,9 @@ comm_cand <- cali_candidates %>%
 comm_cand %>%
   group_by(transaction_tp) %>%
   summarize(num_transactions = n())
+
+comm_cand %>%
+  summarize(num_candidates = n_distinct(cand_name))
 ```
 
 ```{r}
@@ -130,6 +133,9 @@ dim(nv_money)
 nv_money %>%
   group_by(transaction_tp) %>%
   summarize(num_transactions = n())
+
+nv_money %>% 
+  summarize(num_candidates = n_distinct(cand_name))
 ```
 
 ## Analysis

@@ -51,6 +51,7 @@ library(sds192)
 library(ggplot2)
 library(ggthemes)
 library(dplyr)
+library(scales)
 ```
 
 ## Introduction
@@ -129,7 +130,7 @@ contributions %>%
 
 
 ```{r}
-contributions_all <- read_all_contributions()
+#contributions_all <- read_all_contributions()
 #candidates <- candidates
 cali_candidates <- candidates %>%
   filter(cand_office_st=="CA" & cand_office == "S") 
@@ -140,7 +141,9 @@ comm_cand <- cali_candidates %>%
 ggplot(data = comm_cand, aes(x= cand_name, y=transaction_amt, fill=transaction_tp))+
 geom_bar(stat='identity')+
   coord_flip()+
-  #scale_x_discrete(limits = c("0", "500000", "1000000"))+
+  #scale_y_discrete(limits = c("0", "500000", "1000000"))+
+  #scale_y_log10()+
+  scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x), labels = trans_format("log10", math_format(10^.x)))+
   ylab("Transaction Amount")+
   xlab("Candidate Name")+
   labs(fill = "Transaction Type") 
@@ -180,3 +183,4 @@ In this assignment, we attempted the following [standards](https://beanumber.git
 https://ballotpedia.org/United_States_Senate_election_in_California,_2016
 https://www.reuters.com/article/us-usa-election-california-senate/california-poised-to-shut-out-republicans-from-u-s-senate-race-idUSKCN0YT16J
 https://stackoverflow.com/questions/61068031/error-stat-count-can-only-have-an-x-or-y-aesthetic
+http://www.sthda.com/english/wiki/ggplot2-axis-scales-and-transformations

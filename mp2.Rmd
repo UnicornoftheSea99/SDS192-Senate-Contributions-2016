@@ -22,7 +22,7 @@ output:
     code_folding: show
 references:
 - id: fec16
-  type: manual
+  type: article
   title: "fec16: Data Package for the 2016 United States Federal Elections"
   author: 
   - family: Tapal
@@ -59,7 +59,7 @@ What is this article about?
 
 This is how you make a footnote.[^github]
 
-[^github]: Please see [our GitHub repository](https://github.com/sds192-i21/mp2-group-*) for complete code. 
+[^github]: Please see [our GitHub repository](https://github.com/sds192-i21/mp2-pacific-a) for complete code. 
 
 You can cite references using parentheses or not. Sometimes you want to refer to the authors by name. 
 For example, @fec16 provides the data. 
@@ -140,10 +140,16 @@ comm_cand <- cali_candidates %>%
 ggplot(data = comm_cand, aes(x= cand_name, y=transaction_amt, fill=transaction_tp))+
 geom_bar(stat='identity')+
   coord_flip()+
+<<<<<<< HEAD
   #scale_x_discrete(limits = c("0", "500000", "1000000"))+
   ylab("Transaction Amount")+
   xlab("Candidate Name")+
   labs(fill = "Transaction Type") 
+=======
+  xlab("Candidate Name")+
+  ylab("Transaction Amount")+
+  labs(fill = "Transaction Type")
+>>>>>>> e82df61f7a992ab7711b452aecfd3e36de240bc5
   #theme(legend.position="bottom")
   
 ```

@@ -6,6 +6,8 @@ author:
   affiliation: Smith College
 - name: Emily Rhyu
   affiliation: Smith College
+  name: Sa'mya Wilson
+  affiliation: Smith College
 date: "`r format(Sys.Date(), '%B %e, %Y')`"
 output: 
   html_document:

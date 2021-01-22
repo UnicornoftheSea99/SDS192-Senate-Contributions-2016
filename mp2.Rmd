@@ -134,7 +134,7 @@ candidates <- candidates
 cali_candidates <- candidates %>%
   filter(cand_office_st=="CA" & cand_office == "S") 
 comm_cand <- cali_candidates %>%
-  inner_join(contributions_all, by=c("cand_id"="cand_id"))%>%
+  left_join(contributions_all, by=c("cand_id"="cand_id"))%>%
   filter(transaction_tp=="24A" | transaction_tp=="24E")
 
 ```

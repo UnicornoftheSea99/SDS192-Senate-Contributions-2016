@@ -88,13 +88,17 @@ contributions_all <- read_all_contributions()
 
 
 ```{r}
-contributions_all <- read_all_contributions()
+#contributions_all <- read_all_contributions()
 #candidates <- candidates
 cali_candidates <- candidates %>%
   filter(cand_office_st=="CA" & cand_office == "S") 
 comm_cand <- cali_candidates %>%
   left_join(contributions_all, by=c("cand_id"="cand_id"))%>%
   filter(transaction_tp=="24A" | transaction_tp=="24E")
+
+comm_cand %>%
+  group_by(transaction_tp) %>%
+  summarize(num_transactions = n())
 ```
 
 ```{r}
@@ -111,6 +115,22 @@ geom_bar(stat='identity')+
   coord_flip()
 ```
 
+```{r}
+# filter data for Senate candidates from Nevada
+nv_candidates <- candidates %>%
+  filter(cand_office_st == "NV" & cand_office == "S")
+dim(nevada_candidates)
+
+nv_money <- nevada_candidates %>%
+  left_join(contributions_all, by=c("cand_id"="cand_id")) %>%
+  filter(transaction_tp == "24A" | transaction_tp == "24E")%>%
+  select(cand_name, cand_pty_affiliation, cand_election_yr, cand_office, transaction_tp, transaction_amt)
+dim(nv_money)
+
+nv_money %>%
+  group_by(transaction_tp) %>%
+  summarize(num_transactions = n())
+```
 
 ## Analysis
 

@@ -95,11 +95,15 @@ cali_candidates <- candidates %>%
 comm_cand <- cali_candidates %>%
   left_join(contributions_all, by=c("cand_id"="cand_id"))%>%
   filter(transaction_tp=="24A" | transaction_tp=="24E")
+```
 
+```{r}
+# how many transactions of each type
 comm_cand %>%
   group_by(transaction_tp) %>%
   summarize(num_transactions = n())
 
+# how many candidates
 comm_cand %>%
   summarize(num_candidates = n_distinct(cand_name))
 ```
@@ -129,7 +133,9 @@ nv_money <- nevada_candidates %>%
   filter(transaction_tp == "24A" | transaction_tp == "24E")%>%
   select(cand_name, cand_pty_affiliation, cand_election_yr, cand_office, transaction_tp, transaction_amt)
 dim(nv_money)
+```
 
+```{r}
 # how many transactions of each type
 nv_money %>%
   group_by(transaction_tp) %>%

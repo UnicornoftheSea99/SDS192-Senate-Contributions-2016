@@ -6,7 +6,7 @@ author:
   affiliation: Smith College
 - name: Emily Rhyu
   affiliation: Smith College
-  name: Sa'mya Wilson
+- name: Sa'mya Wilson
   affiliation: Smith College
 date: "`r format(Sys.Date(), '%B %e, %Y')`"
 output: 
@@ -129,7 +129,7 @@ contributions %>%
 
 
 ```{r}
-contributions_all <- read_all_contributions()
+#contributions_all <- read_all_contributions()
 #candidates <- candidates
 cali_candidates <- candidates %>%
   filter(cand_office_st=="CA" & cand_office == "S") 
@@ -140,10 +140,12 @@ comm_cand <- cali_candidates %>%
 ggplot(data = comm_cand, aes(x= cand_name, y=transaction_amt, fill=transaction_tp))+
 geom_bar(stat='identity')+
   coord_flip()+
-  xlab("Transaction Amount")+
-  ylab("Candidate Name")+
-  labs(fill = "Transaction Type")+
+  #scale_x_discrete(limits = c("0", "500000", "1000000"))+
+  ylab("Transaction Amount")+
+  xlab("Candidate Name")+
+  labs(fill = "Transaction Type") 
   #theme(legend.position="bottom")
+  
 ```
 
 

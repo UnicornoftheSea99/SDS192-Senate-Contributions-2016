@@ -146,7 +146,9 @@ geom_bar(stat='identity')+
   scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x), labels = trans_format("log10", math_format(10^.x)))+
   ylab("Transaction Amount")+
   xlab("Candidate Name")+
-  labs(fill = "Transaction Type") 
+  labs(title = "Campaign Contributions",
+       subtitle = "Senate candidates from CA in 2016 federal election cycle",
+    fill = "Transaction Type") 
   #theme(legend.position="bottom")
   
 ```

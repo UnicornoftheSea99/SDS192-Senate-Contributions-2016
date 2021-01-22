@@ -127,6 +127,7 @@ contributions %>%
   arrange(desc(num_contributions))
 ```
 
+
 ```{r}
 contributions <- contributions
 candidates <- candidates

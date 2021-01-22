@@ -48,6 +48,9 @@ knitr::opts_chunk$set(
 )
 library(tidyverse)
 library(sds192)
+library(ggplot2)
+library(ggthemes)
+library(dplyr)
 ```
 
 ## Introduction
@@ -123,6 +126,14 @@ contributions %>%
   ) %>%
   arrange(desc(num_contributions))
 ```
+
+```{r}
+contributions <- contributions
+candidates <- candidates
+cali_candidates <- candidates %>%
+  filter(cand_office_st=="CA")
+```
+
 
 ## Analysis
 

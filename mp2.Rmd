@@ -88,8 +88,7 @@ contributions_all <- read_all_contributions()
 
 
 ```{r}
-#contributions_all <- read_all_contributions()
-#candidates <- candidates
+contributions_all <- read_all_contributions()
 cali_candidates <- candidates %>%
   filter(cand_office_st=="CA" & cand_office == "S") 
 comm_cand <- cali_candidates %>%
@@ -99,14 +98,18 @@ comm_cand <- cali_candidates %>%
 
 ```{r}
 # what do transactions look like
-comm_cand %>%
+ca_transactions <- comm_cand %>%
   group_by(transaction_tp) %>%
   summarize(num_transactions = n(),
             transaction_total = sum(transaction_amt))
 
-# how many candidates
+#how many candidates
 comm_cand %>%
   summarize(num_candidates = n_distinct(cand_name))
+
+ggplot(data=ca_transactions, aes(x=transaction_tp, y=transaction_total, fill=transaction_tp))+
+  geom_col()+
+  scale_fill_manual(values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" ))
 ```
 
 ```{r}
@@ -115,7 +118,7 @@ geom_bar(stat='identity')+
   scale_fill_manual(values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" ))+
   scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x), labels = trans_format("log10", math_format(10^.x)))+
   labs(title = "Campaign Contributions",
-       subtitle = "Senate candidates from CA in 2016 primary",
+       subtitle = "Senate candidates from CA in 2016 elections",
        fill = "Transaction Type") +
   ylab("Transaction Amount")+
   xlab("Candidate Name")+
@@ -127,29 +130,41 @@ geom_bar(stat='identity')+
 # filter data for Senate candidates from Nevada
 nv_candidates <- candidates %>%
   filter(cand_office_st == "NV" & cand_office == "S")
-dim(nevada_candidates)
+#dim(nv_candidates)
 
-nv_money <- nevada_candidates %>%
+nv_money <- nv_candidates %>%
   left_join(contributions_all, by=c("cand_id"="cand_id")) %>%
   filter(transaction_tp == "24A" | transaction_tp == "24E")%>%
   select(cand_name, cand_pty_affiliation, cand_election_yr, cand_office, transaction_tp, transaction_amt)
-dim(nv_money)
+#dim(nv_money)
 ```
 
 ```{r}
 # what do transactions look like
-nv_money %>%
+nv_transactions <- nv_money %>%
   group_by(transaction_tp) %>%
   summarize(num_transactions = n(), transaction_total = sum(transaction_amt))
 
 # how many candidates
 nv_money %>% 
   summarize(num_candidates = n_distinct(cand_name))
+
+ggplot(data=nv_transactions, aes(x=transaction_tp, y=transaction_total, fill=transaction_tp))+
+  geom_col()+
+  scale_fill_manual(values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" ))
 ```
 
 ```{r}
 ggplot(data = nv_money, aes(x= cand_name, y=transaction_amt, fill=transaction_tp))+
   geom_bar(stat='identity') +
+  scale_fill_manual(values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" ))+
+  scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x), labels = trans_format("log10", math_format(10^.x)))+
+  labs(title = "Campaign Contributions",
+       subtitle = "Senate candidates from NV in 2016 elections",
+       fill = "Transaction Type") +
+  ylab("Transaction Amount")+
+  xlab("Candidate Name")+
+   theme(legend.position=c(0.8, 0.2))+
   coord_flip()
 ```
 

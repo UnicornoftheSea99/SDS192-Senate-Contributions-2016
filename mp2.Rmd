@@ -55,19 +55,16 @@ library(scales)
 ```
 
 ## Introduction
+What role do contributions play in senate elections?  In the following data, we strive to shed some light on this question by examining campaign contributions during the 2016 senate elections for California and Nevada. We chose to examine California as not only is it the home of all the authors, but also because it is one of the three states that uses a top-two primary system in which the top two winners from the primary election move on to the general election regardless of party affiliation.^[1]. In 2016 this was particularly relevant as both general election candidates, Kamala Harris and Loretta Sanchez, were from the Democratic Party. On the other hand, we chose Nevada because it uses a closed primary system rather than a top-two primary system, meaning only voters who are registered with a particular political party can vote in that party’s primary election, and because it was one of the competitive battleground races.^[2]
 
-What is this article about? 
+**NOTE:** The contributions shown are limited to 24A and 24E transactions, which are transactions opposing the candidate and transactions advocating  for the candidate respectively. 
 
-This is how you make a footnote.[^github]
+Our code can be found on GitHub.^[github]
 
-[^github]: Please see [our GitHub repository](https://github.com/sds192-i21/mp2-pacific-a) for complete code. 
+[ˆ1]:[California 2016 Senate Elections]( https://ballotpedia.org/United_States_Senate_election_in_California,_2016#cite_note-6)
+[ˆ2]: [Nevada 2016 Senate Elections](https://ballotpedia.org/United_States_Senate_election_in_Nevada,_2016)
+[^github]: [our GitHub repository](https://github.com/sds192-i21/mp2-pacific-a)
 
-You can cite references using parentheses or not. Sometimes you want to refer to the authors by name. 
-For example, @fec16 provides the data. 
-Other times, you want to cite something at the end of a sentence. 
-Our analysis is based on data from the Federal Election Commission [@fec16].
-
-If your data comes from a package, you can cite your data source using the information from the `citation()` function.
 
 ```{r}
 citation("fec16")
@@ -82,13 +79,14 @@ library(fec16)
 
 To get the full `contributions` table, run this:
 
-```{r, eval=FALSE}
+```{r, eval=TRUE}
+#change eval to FALSE before turning in
 contributions_all <- read_all_contributions()
 ```
 
 
 ```{r}
-contributions_all <- read_all_contributions()
+#contributions_all <- read_all_contributions()
 cali_candidates <- candidates %>%
   filter(cand_office_st=="CA" & cand_office == "S") 
 comm_cand <- cali_candidates %>%
@@ -104,8 +102,8 @@ ca_transactions <- comm_cand %>%
             transaction_total = sum(transaction_amt))
 
 #how many candidates
-comm_cand %>%
-  summarize(num_candidates = n_distinct(cand_name))
+#comm_cand %>%
+#  summarize(num_candidates = n_distinct(cand_name))
 
 ggplot(data=ca_transactions, aes(x=transaction_tp, y=transaction_total, fill=transaction_tp))+
   geom_col()+
@@ -125,6 +123,8 @@ geom_bar(stat='identity')+
    theme(legend.position=c(0.8, 0.8))+
   coord_flip()
 ```
+Kamala Harris and Loretta Sanchez are Democrats while George Sundheim and Thomas Del Becarro are Republicans.
+
 
 ```{r}
 # filter data for Senate candidates from Nevada
@@ -146,8 +146,8 @@ nv_transactions <- nv_money %>%
   summarize(num_transactions = n(), transaction_total = sum(transaction_amt))
 
 # how many candidates
-nv_money %>% 
-  summarize(num_candidates = n_distinct(cand_name))
+#nv_money %>% 
+#  summarize(num_candidates = n_distinct(cand_name))
 
 ggplot(data=nv_transactions, aes(x=transaction_tp, y=transaction_total, fill=transaction_tp))+
   geom_col()+
@@ -167,14 +167,17 @@ ggplot(data = nv_money, aes(x= cand_name, y=transaction_amt, fill=transaction_tp
    theme(legend.position=c(0.8, 0.2))+
   coord_flip()
 ```
+Joe and Thomas Heck are Republicans while Catherine Masto is a Democrat.
 
 ## Analysis
 
 What did you discover?
 
+
 ## Conclusion
 
 What did you learn about the 2016 federal election cycle?
+should include relation between results and who actually won
 
 ## Word count
 
@@ -196,8 +199,8 @@ In this assignment, we attempted the following [standards](https://beanumber.git
 - `r standard_button("ethics")`: We mastered the Ethics standard because we...
 
 ## References
-https://ballotpedia.org/United_States_Senate_election_in_California,_2016
-https://www.reuters.com/article/us-usa-election-california-senate/california-poised-to-shut-out-republicans-from-u-s-senate-race-idUSKCN0YT16J
+**NOTE** Need to reformat as RMarkdown links
+
 https://stackoverflow.com/questions/61068031/error-stat-count-can-only-have-an-x-or-y-aesthetic
 http://www.sthda.com/english/wiki/ggplot2-axis-scales-and-transformations
 https://stackoverflow.com/questions/38788357/change-bar-plot-colour-in-geom-bar-with-ggplot2-in-r

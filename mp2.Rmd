@@ -109,7 +109,9 @@ ca_transactions <- comm_cand %>%
 
 ggplot(data=ca_transactions, aes(x=transaction_tp, y=transaction_total, fill=transaction_tp))+
   geom_col()+
-  scale_fill_manual(values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" ))
+  scale_fill_manual("Transaction Type", values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" )) +
+  scale_y_continuous("Transaction Total ($) ", breaks = c(0, 500000, 1000000, 1500000), labels = c("0", "500,000", "1,000,000", "1,500,000")) +
+  scale_x_discrete("Transaction Type") 
 ```
 
 ```{r}

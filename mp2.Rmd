@@ -39,7 +39,7 @@ references:
   url: https://CRAN.R-project.org/package=fec16
   notes: "R package version 0.1.3"
 editor_options: 
-  chunk_output_type: console
+  chunk_output_type: inline
 ---
 
 ```{r setup, include=FALSE}
@@ -85,7 +85,7 @@ To get the full `contributions` table, run this:
 #change eval to FALSE before turning in
 contributions_all <- read_all_contributions()
 ```
-
+### California Election
 
 ```{r}
 #contributions_all <- read_all_contributions()
@@ -130,6 +130,7 @@ ggplot(data = comm_cand, aes(x= cand_name, y=transaction_amt, fill=transaction_t
 ```
 Kamala Harris and Loretta Sanchez are Democrats while George Sundheim and Thomas Del Becarro are Republicans.
 
+### Nevada Election
 
 ```{r}
 # filter data for Senate candidates from Nevada

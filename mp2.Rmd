@@ -180,8 +180,13 @@ What did you discover?
 
 ## Conclusion
 
-What did you learn about the 2016 federal election cycle?
-should include relation between results and who actually won
+We learned campaign contributions to Senate candidates in the 2016 election were used to support candidates and to oppose them. But, the distribution of money between types of transactions and between candidates depended on the political climate of the state. 
+
+California is a very blue state, and both candidates that made it to the general election were Democrats. In this situation, most campaign contributions were used to support candidates. Kamala Harris, the winner, received the most supportive money. 
+
+The Senate election in swing state Nevada was much more contentious. The top two candidates were a Democrat and a Republican. In this situation, considerably more money was spent overall and a far greater proportion of the money was spent opposing candidates than supporting them. However, Catherine Cortez Matso won despite receiving more oppositional money and less supportive money than Joe Heck. 
+
+So in general, when Senate elections are more contentious, more money is spent and more of that money is used to oppose candidates. But, receiving more contributions (either supportive or oppositional transactions) does not necessarily indicate success in the election. 
 
 ## Word count
 

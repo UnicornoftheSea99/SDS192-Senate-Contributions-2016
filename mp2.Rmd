@@ -199,11 +199,12 @@ In this assignment, we attempted the following [standards](https://beanumber.git
 
 - `r standard_button("aesthetics")`: We mastered the Aesthetics standard because we made use of the available geoms such as geom_bar() and geom_col() in order to customize our graphics. We also explored various color palettes when creating our graphics. 
 
+- `r standard_button("context")`: We mastered the Context standard because we created multiple graphs which are easy to read and tell a story regarding the results of the 2016 senate election in California and Nevada. 
+
+
 - `r standard_button("markdown")`: We mastered the R Markdown standard because we had no loading or error messages in our code. We also included a variety of web elements including data graphics, links, and code chunks in R Markdown. 
 
 - `r standard_button("github")`: We mastered the GitHub standard because we successfully utilized push and pull features to work together as a group. We also used GitHub to resolve merge conflicts by utilizing MWE.
-
-- `r standard_button("context")`: We mastered the Context standard because we created multiple graphs which are easy to read and tell a story regarding the results of the 2016 senate election in California and Nevada. 
 
 - `r standard_button("ethics")`: We mastered the Ethics standard because we used published resources for guidance from the Federal Election Commission and chose color, labels, and scales to make our graphs comparable and avoid being misleading. 
 

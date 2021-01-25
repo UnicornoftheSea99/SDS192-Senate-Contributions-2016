@@ -54,7 +54,7 @@ library(dplyr)
 ```
 
 ## Introduction
-What role do contributions play in senate elections?  Using data from the fec16 package[^1], we strive to shed some light on this question by examining campaign contributions during the 2016 senate elections for California and Nevada. We chose to examine California as not only is it the home of all the authors, but also because it is one of the three states that uses a top-two primary system in which the top two winners from the primary election move on to the general election regardless of party affiliation.[^2]. In 2016 this was particularly relevant as both general election candidates, Kamala Harris and Loretta Sanchez, were from the Democratic Party. On the other hand, we chose Nevada because it uses a closed primary system rather than a top-two primary system, meaning only voters who are registered with a particular political party can vote in that party’s primary election, and because it was one of the competitive battleground races.[^3]
+What role do contributions play in senate elections?  Using data from the fec16 package[^1], we strive to shed some light on this question by examining campaign contributions during the 2016 senate elections for California and Nevada. We chose to examine California as not only is it the home of all the authors, but also because it is one of the three states that uses a top-two primary system in which the top two winners from the primary election move on to the general election regardless of party affiliation.[^2] In 2016 this was particularly relevant as both general election candidates, Kamala Harris and Loretta Sanchez, were from the Democratic Party. On the other hand, we chose Nevada because it uses a closed primary system rather than a top-two primary system, meaning only voters who are registered with a particular political party can vote in that party’s primary election, and because it was one of the competitive battleground races.[^3]
 
 **NOTE:** The contributions shown are limited to 24A and 24E transactions, which are transactions opposing the candidate and transactions advocating  for the candidate respectively. 
 
@@ -72,13 +72,8 @@ Our code can be found on GitHub.[^github]
 
 ## Loading the data
 
-```{r, message=FALSE}
+```{r, message=FALSE, eval = TRUE}
 library(fec16)
-```
-
-To get the full `contributions` table, run this:
-
-```{r, eval=TRUE}
 contributions_all <- read_all_contributions()
 ```
 

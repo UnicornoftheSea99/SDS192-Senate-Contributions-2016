@@ -38,8 +38,6 @@ references:
   publisher: CRAN
   url: https://CRAN.R-project.org/package=fec16
   notes: "R package version 0.1.3"
-editor_options: 
-  chunk_output_type: inline
 ---
 
 ```{r setup, include=FALSE}
@@ -85,7 +83,7 @@ To get the full `contributions` table, run this:
 #change eval to FALSE before turning in
 contributions_all <- read_all_contributions()
 ```
-### California Election
+
 
 ```{r}
 #contributions_all <- read_all_contributions()
@@ -109,28 +107,25 @@ ca_transactions <- comm_cand %>%
 
 ggplot(data=ca_transactions, aes(x=transaction_tp, y=transaction_total, fill=transaction_tp))+
   geom_col()+
-  scale_fill_manual("Transaction Type", values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" )) +
-  scale_y_continuous("Transaction Total ($) ", breaks = c(0, 500000, 1000000, 1500000), labels = c("0", "500,000", "1,000,000", "1,500,000")) +
-  scale_x_discrete("Transaction Type") 
+  scale_fill_manual(values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" ))+
+  labs(title = "California's Distribution of Campaign Money")
 ```
 
 ```{r}
-ggplot(data = comm_cand, aes(x= cand_name, y=transaction_amt, fill=transaction_tp)) +
-  geom_bar(stat='identity') +
-  scale_fill_manual(values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" )) +
-  #scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x), labels = trans_format("log10", math_format(10^.x)))+
-  scale_y_continuous(breaks = c(0, 500000, 1000000), labels = c("0", "500,000", "1,000,000")) + 
+ggplot(data = comm_cand, aes(x= cand_name, y=transaction_amt, fill=transaction_tp))+
+geom_bar(stat='identity')+
+  scale_fill_manual(values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" ))+
+  scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x), labels = trans_format("log10", math_format(10^.x)))+
   labs(title = "Campaign Contributions",
        subtitle = "Senate candidates from CA in 2016 elections",
        fill = "Transaction Type") +
-  ylab("Transaction Amount ($)")+
+  ylab("Transaction Amount")+
   xlab("Candidate Name")+
    theme(legend.position=c(0.8, 0.8))+
   coord_flip()
 ```
 Kamala Harris and Loretta Sanchez are Democrats while George Sundheim and Thomas Del Becarro are Republicans.
 
-### Nevada Election
 
 ```{r}
 # filter data for Senate candidates from Nevada
@@ -157,19 +152,19 @@ nv_transactions <- nv_money %>%
 
 ggplot(data=nv_transactions, aes(x=transaction_tp, y=transaction_total, fill=transaction_tp))+
   geom_col()+
-  scale_fill_manual(values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" ))
+  scale_fill_manual(values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" ))+
+labs(title = "Nevada's Distribution of Campaign Money")
 ```
-
+    
 ```{r}
 ggplot(data = nv_money, aes(x= cand_name, y=transaction_amt, fill=transaction_tp))+
   geom_bar(stat='identity') +
   scale_fill_manual(values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" ))+
-  scale_y_continuous(breaks = c(0, 10000000, 20000000, 30000000, 40000000), labels = c("0", "10,000,000", "20,000,000", "30,000,000", "40,000,000"))+
-  #scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x), labels = trans_format("log10", math_format(10^.x)))+
+  scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x), labels = trans_format("log10", math_format(10^.x)))+
   labs(title = "Campaign Contributions",
        subtitle = "Senate candidates from NV in 2016 elections",
        fill = "Transaction Type") +
-  ylab("Transaction Amount ($)")+
+  ylab("Transaction Amount")+
   xlab("Candidate Name")+
    theme(legend.position=c(0.8, 0.2))+
   coord_flip()
@@ -178,7 +173,9 @@ Joe and Thomas Heck are Republicans while Catherine Masto is a Democrat.
 
 ## Analysis
 
-What did you discover?
+Graphs of campaign contributions for the 2016 senate election in California and Nevada showed that some candidates were favored over others. In California, candidates George ‘Duf’ Sundheim and Loretta Sanchez only had supporting transaction types. Thomas Del Beccaro only had opposing transactions, showing that he was not a popular candidate but instead a candidate the people opposed. Kamala D. Harris had a mixture of supporting and opposing transactions unlike Sanchez and Sundheim; however, if we take a look at the x-axis on the graph we can see that she had far more transactions, mostly supporting, than any other candidate. Kamala D. Harris won the 2016 senate election and has now become our first vice president who is not only a woman, but a woman of color. 
+
+Looking at the Nevada race we can see disparities between Nevada’s 2016 Senate election and California’s. One of the biggest differences is that all candidates in Nevada had both opposing and supporting contributions. Thomas Heck received few supporting and opposing contributions. Evidence shows that he was not a popular candidate while evidence for Joe Heck shows that he was not a favored candidate by far. Well over half of Joe Heck’s transactions were opposing ones which greatly overshadowed his supporting transactions. Catherine Cortez Masto was the winner of this election. Unlike the California senate elections where there were obvious favorites, support for candidates in the Nevada senate elections was clearly divided. 
 
 
 ## Conclusion
@@ -189,7 +186,8 @@ California is a very blue state, and both candidates that made it to the general
 
 The Senate election in swing state Nevada was much more contentious. The top two candidates were a Democrat and a Republican. In this situation, considerably more money was spent overall and a far greater proportion of the money was spent opposing candidates than supporting them. However, Catherine Cortez Matso won despite receiving more oppositional money and less supportive money than Joe Heck. 
 
-So in general, when Senate elections are more contentious, more money is spent and more of that money is used to oppose candidates. But, receiving more contributions (either supportive or oppositional transactions) does not necessarily indicate success in the election. 
+So in general, when Senate elections are more contentious, more money is spent and more of that money is used to oppose candidates. But, receiving more contributions (either supportive or oppositional transactions) does not necessarily indicate success in the election.
+
 
 ## Word count
 
@@ -201,14 +199,20 @@ text_stats()
 
 In this assignment, we attempted the following [standards](https://beanumber.github.io/sds192/standards.html):
 
-- `r standard_button("wrangling")`: We met the Wrangling standard because we...
-- `r standard_button("relational")`: We met the Relational standard because we...
-- `r standard_button("reshape")`: We met the Reshape standard because we...
-- `r standard_button("aesthetics")`: We mastered the Aesthetics standard because we...
-- `r standard_button("markdown")`: We mastered the R Markdown standard because we...
-- `r standard_button("github")`: We mastered the GitHub standard because we...
-- `r standard_button("context")`: We mastered the Context standard because we...
-- `r standard_button("ethics")`: We mastered the Ethics standard because we...
+- `r standard_button("wrangling")`: We met the Wrangling standard because we utilized the dplyr package and its features including group_by(), filter(), select(), and summarize() in order to perform basic data wrangling.
+
+- `r standard_button("relational")`: We met the Relational standard because we combined multiple data frames from the fec16 package (candidates and contributions) in order to construct our data graphics.
+
+- `r standard_button("aesthetics")`: We mastered the Aesthetics standard because we made use of the available geoms such as geom_bar() and geom_col() in order to customize our graphics. We also explored various color palettes when creating our graphics. 
+
+- `r standard_button("markdown")`: We mastered the R Markdown standard because we had no loading or error messages in our code. We also included a variety of web elements including data graphics, links, and code chunks in R Markdown. 
+
+- `r standard_button("github")`: We mastered the GitHub standard because we successfully utilized push and pull features to work together as a group. We also used GitHub to resolve merge conflicts by utilizing MWE.
+
+- `r standard_button("context")`: We mastered the Context standard because we created multiple graphs which are easy to read and tell a story regarding the results of the 2016 senate election in California and Nevada. 
+
+- `r standard_button("ethics")`: We mastered the Ethics standard because we used published resources for guidance from the Federal Election Commission and chose color, labels, and non log scales to make our graphs comparable and avoid being misleading. 
+
 
 ## References
 **NOTE** Need to reformat as RMarkdown links

@@ -51,11 +51,11 @@ library(sds192)
 library(ggplot2)
 library(ggthemes)
 library(dplyr)
-library(scales)
+#library(scales)
 ```
 
 ## Introduction
-What role do contributions play in senate elections?  In the following data, we strive to shed some light on this question by examining campaign contributions during the 2016 senate elections for California and Nevada. We chose to examine California as not only is it the home of all the authors, but also because it is one of the three states that uses a top-two primary system in which the top two winners from the primary election move on to the general election regardless of party affiliation.^[1]. In 2016 this was particularly relevant as both general election candidates, Kamala Harris and Loretta Sanchez, were from the Democratic Party. On the other hand, we chose Nevada because it uses a closed primary system rather than a top-two primary system, meaning only voters who are registered with a particular political party can vote in that party’s primary election, and because it was one of the competitive battleground races.^[2]
+What role do contributions play in senate elections?  With the following data, we strive to shed some light on this question by examining campaign contributions during the 2016 senate elections for California and Nevada. We chose to examine California as not only is it the home of all the authors, but also because it is one of the three states that uses a top-two primary system in which the top two winners from the primary election move on to the general election regardless of party affiliation.^[1]. In 2016 this was particularly relevant as both general election candidates, Kamala Harris and Loretta Sanchez, were from the Democratic Party. On the other hand, we chose Nevada because it uses a closed primary system rather than a top-two primary system, meaning only voters who are registered with a particular political party can vote in that party’s primary election, and because it was one of the competitive battleground races.^[2]
 
 **NOTE:** The contributions shown are limited to 24A and 24E transactions, which are transactions opposing the candidate and transactions advocating  for the candidate respectively. 
 
@@ -70,7 +70,6 @@ Our code can be found on GitHub.^[github]
 citation("fec16")
 ```
 
-
 ## Loading the data
 
 ```{r, message=FALSE}
@@ -80,11 +79,13 @@ library(fec16)
 To get the full `contributions` table, run this:
 
 ```{r, eval=TRUE}
-contributions_all <- read_all_contributions()
+#contributions_all <- read_all_contributions()
 ```
 
+## California Election
 
 ```{r}
+# filter for CA senate candidates
 cali_candidates <- candidates %>%
   filter(cand_office_st=="CA" & cand_office == "S") 
 comm_cand <- cali_candidates %>%
@@ -93,7 +94,7 @@ comm_cand <- cali_candidates %>%
 ```
 
 ```{r}
-# what do transactions look like
+# CA contributions by type
 ca_transactions <- comm_cand %>%
   group_by(transaction_tp) %>%
   summarize(num_transactions = n(),
@@ -106,14 +107,15 @@ ggplot(data=ca_transactions, aes(x=transaction_tp, y=transaction_total, fill=tra
 ```
 
 ```{r}
+# CA contributions by candidate
 ggplot(data = comm_cand, aes(x= cand_name, y=transaction_amt, fill=transaction_tp))+
 geom_bar(stat='identity')+
   scale_fill_manual(values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" ))+
-  scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x), labels = trans_format("log10", math_format(10^.x)))+
+  scale_y_continuous(breaks = c(0,500000, 1000000), labels = c("0", "500,000", "1,000,000")) +
   labs(title = "Campaign Contributions",
        subtitle = "Senate candidates from CA in 2016 elections",
        fill = "Transaction Type") +
-  ylab("Transaction Amount")+
+  ylab("Transaction Amount ($)")+
   xlab("Candidate Name")+
    theme(legend.position=c(0.8, 0.8))+
   coord_flip()
@@ -121,9 +123,10 @@ geom_bar(stat='identity')+
 
 Kamala Harris and Loretta Sanchez are Democrats while George Sundheim and Thomas Del Becarro are Republicans.
 
+## Nevada Election
 
 ```{r}
-# filter data for Senate candidates from Nevada
+# filter Senate candidates from Nevada
 nv_candidates <- candidates %>%
   filter(cand_office_st == "NV" & cand_office == "S")
 
@@ -134,32 +137,35 @@ nv_money <- nv_candidates %>%
 ```
 
 ```{r}
-# what do transactions look like
+# NV contributions by type
 nv_transactions <- nv_money %>%
   group_by(transaction_tp) %>%
   summarize(num_transactions = n(), transaction_total = sum(transaction_amt))
 
 ggplot(data=nv_transactions, aes(x=transaction_tp, y=transaction_total, fill=transaction_tp))+
   geom_col()+
-  scale_fill_manual(values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" ))+
-labs(title = "Nevada's Distribution of Campaign Money")
+  scale_fill_manual("Transaction Type", values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" ))+
+labs(title = "Nevada's Distribution of Campaign Money")+
+  scale_y_continuous("Transaction Total ($)", breaks = c(0, 20000000, 40000000, 60000000), labels = c("0", "20,000,000", "40,000,000", "60,000,000")) +
+  xlab("Transaction Type")
 ```
     
 ```{r}
+# NV contributions by candidate
 ggplot(data = nv_money, aes(x= cand_name, y=transaction_amt, fill=transaction_tp))+
   geom_bar(stat='identity') +
   scale_fill_manual(values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" ))+
-  scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x), labels = trans_format("log10", math_format(10^.x)))+
+  scale_y_continuous(breaks = c(0, 10000000, 20000000, 30000000, 40000000), labels = c("0", "10,000,000", "20,000,000", "30,000,000", "40,000,000")) +
   labs(title = "Campaign Contributions",
        subtitle = "Senate candidates from NV in 2016 elections",
        fill = "Transaction Type") +
-  ylab("Transaction Amount")+
+  ylab("Transaction Amount ($)")+
   xlab("Candidate Name")+
    theme(legend.position=c(0.8, 0.2))+
   coord_flip()
 ```
 
-Joe and Thomas Heck are Republicans while Catherine Masto is a Democrat.
+Joe and Thomas Heck are Republicans while Catherine Cortez Masto is a Democrat.
 
 ## Analysis
 
@@ -167,16 +173,15 @@ Graphs of campaign contributions for the 2016 senate election in California and 
 
 Looking at the Nevada race we can see disparities between Nevada’s 2016 Senate election and California’s. One of the biggest differences is that all candidates in Nevada had both opposing and supporting contributions. Thomas Heck received few supporting and opposing contributions. Evidence shows that he was not a popular candidate while evidence for Joe Heck shows that he was not a favored candidate by far. Well over half of Joe Heck’s transactions were opposing ones which greatly overshadowed his supporting transactions. Catherine Cortez Masto was the winner of this election. Unlike the California senate elections where there were obvious favorites, support for candidates in the Nevada senate elections was clearly divided. 
 
-
 ## Conclusion
 
 We learned campaign contributions to Senate candidates in the 2016 election were used to support candidates and to oppose them. But, the distribution of money between types of transactions and between candidates depended on the political climate of the state. 
 
-California is a very blue state, and both candidates that made it to the general election were Democrats. In this situation, most campaign contributions were used to support candidates. Kamala Harris, the winner, received the most supportive money. 
+California is a very blue state, and both candidates that made it to the general election were Democrats. In this situation, most campaign contributions were used to support candidates. Kamala Harris, the winner, received the most supportive money.
 
 The Senate election in swing state Nevada was much more contentious. The top two candidates were a Democrat and a Republican. In this situation, considerably more money was spent overall and a far greater proportion of the money was spent opposing candidates than supporting them. However, Catherine Cortez Matso won despite receiving more oppositional money and less supportive money than Joe Heck. 
 
-So in general, when Senate elections are more contentious, more money is spent and more of that money is used to oppose candidates. But, receiving more contributions (either supportive or oppositional transactions) does not necessarily indicate success in the election.
+So in general, when Senate elections are more contentious, more money is spent and more of that money is used to oppose candidates. But, receiving more contributions (supporting or opposing) does not necessarily indicate success in the election.
 
 
 ## Word count
@@ -201,7 +206,7 @@ In this assignment, we attempted the following [standards](https://beanumber.git
 
 - `r standard_button("context")`: We mastered the Context standard because we created multiple graphs which are easy to read and tell a story regarding the results of the 2016 senate election in California and Nevada. 
 
-- `r standard_button("ethics")`: We mastered the Ethics standard because we used published resources for guidance from the Federal Election Commission and chose color, labels, and non log scales to make our graphs comparable and avoid being misleading. 
+- `r standard_button("ethics")`: We mastered the Ethics standard because we used published resources for guidance from the Federal Election Commission and chose color, labels, and scales to make our graphs comparable and avoid being misleading. 
 
 
 ## References

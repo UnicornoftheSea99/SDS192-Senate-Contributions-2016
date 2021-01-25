@@ -1,5 +1,5 @@
 ---
-title: "Put a real title here"
+title: "Tracking Contributions in the 2016 California and Nevada Senate Elections"
 subtitle: "SDS 192: MP2"
 author: 
 - name: Julia Walker
@@ -80,13 +80,11 @@ library(fec16)
 To get the full `contributions` table, run this:
 
 ```{r, eval=TRUE}
-#change eval to FALSE before turning in
 contributions_all <- read_all_contributions()
 ```
 
 
 ```{r}
-#contributions_all <- read_all_contributions()
 cali_candidates <- candidates %>%
   filter(cand_office_st=="CA" & cand_office == "S") 
 comm_cand <- cali_candidates %>%
@@ -100,10 +98,6 @@ ca_transactions <- comm_cand %>%
   group_by(transaction_tp) %>%
   summarize(num_transactions = n(),
             transaction_total = sum(transaction_amt))
-
-#how many candidates
-#comm_cand %>%
-#  summarize(num_candidates = n_distinct(cand_name))
 
 ggplot(data=ca_transactions, aes(x=transaction_tp, y=transaction_total, fill=transaction_tp))+
   geom_col()+
@@ -124,6 +118,7 @@ geom_bar(stat='identity')+
    theme(legend.position=c(0.8, 0.8))+
   coord_flip()
 ```
+
 Kamala Harris and Loretta Sanchez are Democrats while George Sundheim and Thomas Del Becarro are Republicans.
 
 
@@ -131,13 +126,11 @@ Kamala Harris and Loretta Sanchez are Democrats while George Sundheim and Thomas
 # filter data for Senate candidates from Nevada
 nv_candidates <- candidates %>%
   filter(cand_office_st == "NV" & cand_office == "S")
-#dim(nv_candidates)
 
 nv_money <- nv_candidates %>%
   left_join(contributions_all, by=c("cand_id"="cand_id")) %>%
   filter(transaction_tp == "24A" | transaction_tp == "24E")%>%
   select(cand_name, cand_pty_affiliation, cand_election_yr, cand_office, transaction_tp, transaction_amt)
-#dim(nv_money)
 ```
 
 ```{r}
@@ -145,10 +138,6 @@ nv_money <- nv_candidates %>%
 nv_transactions <- nv_money %>%
   group_by(transaction_tp) %>%
   summarize(num_transactions = n(), transaction_total = sum(transaction_amt))
-
-# how many candidates
-#nv_money %>% 
-#  summarize(num_candidates = n_distinct(cand_name))
 
 ggplot(data=nv_transactions, aes(x=transaction_tp, y=transaction_total, fill=transaction_tp))+
   geom_col()+
@@ -169,6 +158,7 @@ ggplot(data = nv_money, aes(x= cand_name, y=transaction_amt, fill=transaction_tp
    theme(legend.position=c(0.8, 0.2))+
   coord_flip()
 ```
+
 Joe and Thomas Heck are Republicans while Catherine Masto is a Democrat.
 
 ## Analysis
@@ -215,9 +205,6 @@ In this assignment, we attempted the following [standards](https://beanumber.git
 
 
 ## References
-**NOTE** Need to reformat as RMarkdown links
-
-https://stackoverflow.com/questions/61068031/error-stat-count-can-only-have-an-x-or-y-aesthetic
-http://www.sthda.com/english/wiki/ggplot2-axis-scales-and-transformations
-https://stackoverflow.com/questions/38788357/change-bar-plot-colour-in-geom-bar-with-ggplot2-in-r
-https://ballotpedia.org/United_States_Senate_election_in_Nevada,_2016
+- [https://stackoverflow.com/questions/61068031/error-stat-count-can-only-have-an-x-or-y-aesthetic](https://stackoverflow.com/questions/61068031/error-stat-count-can-only-have-an-x-or-y-aesthetic)
+- [http://www.sthda.com/english/wiki/ggplot2-axis-scales-and-transformations](http://www.sthda.com/english/wiki/ggplot2-axis-scales-and-transformations)
+- [https://stackoverflow.com/questions/38788357/change-bar-plot-colour-in-geom-bar-with-ggplot2-in-r](https://stackoverflow.com/questions/38788357/change-bar-plot-colour-in-geom-bar-with-ggplot2-in-r)

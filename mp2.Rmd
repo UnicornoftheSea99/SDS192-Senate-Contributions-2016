@@ -212,9 +212,9 @@ In this assignment, we attempted the following [standards](https://beanumber.git
 - [https://stackoverflow.com/questions/61068031/error-stat-count-can-only-have-an-x-or-y-aesthetic](https://stackoverflow.com/questions/61068031/error-stat-count-can-only-have-an-x-or-y-aesthetic)
 - [http://www.sthda.com/english/wiki/ggplot2-axis-scales-and-transformations](http://www.sthda.com/english/wiki/ggplot2-axis-scales-and-transformations)
 - [https://stackoverflow.com/questions/38788357/change-bar-plot-colour-in-geom-bar-with-ggplot2-in-r](https://stackoverflow.com/questions/38788357/change-bar-plot-colour-in-geom-bar-with-ggplot2-in-r)
--[https://www.rgj.com/story/news/politics/2016/10/11/heck-and-cortez-masto-outspent-outside-groups/91747818/](https://www.rgj.com/story/news/politics/2016/10/11/heck-and-cortez-masto-outspent-outside-groups/91747818/)
--[https://ktla.com/news/politics/california-u-s-senate-election-results-kamala-harris-projected-to-win/](https://ktla.com/news/politics/california-u-s-senate-election-results-kamala-harris-projected-to-win/)
--[https://www.rpubs.com/dvdunne/reorder_ggplot_barchart_axis](https://www.rpubs.com/dvdunne/reorder_ggplot_barchart_axis)
+- [https://www.rgj.com/story/news/politics/2016/10/11/heck-and-cortez-masto-outspent-outside-groups/91747818/](https://www.rgj.com/story/news/politics/2016/10/11/heck-and-cortez-masto-outspent-outside-groups/91747818/)
+- [https://ktla.com/news/politics/california-u-s-senate-election-results-kamala-harris-projected-to-win/](https://ktla.com/news/politics/california-u-s-senate-election-results-kamala-harris-projected-to-win/)
+- [https://www.rpubs.com/dvdunne/reorder_ggplot_barchart_axis](https://www.rpubs.com/dvdunne/reorder_ggplot_barchart_axis)
 
 
 

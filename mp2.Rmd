@@ -103,13 +103,15 @@ ca_transactions <- comm_cand %>%
 
 ggplot(data=ca_transactions, aes(x=transaction_tp, y=transaction_total, fill=transaction_tp))+
   geom_col()+
-  scale_fill_manual(values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" ))+
-  labs(title = "California's Distribution of Campaign Money")
+  scale_fill_manual("Transaction Type", values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" ))+
+  labs(title = "California's Distribution of Campaign Money") +
+  xlab("Transaction Type") +
+  ylab("Transaction Total ($)")
 ```
 
 ```{r}
 # CA contributions by candidate
-ggplot(data = comm_cand, aes(x= cand_name, y=transaction_amt, fill=transaction_tp))+
+ggplot(data = comm_cand, aes(x=reorder(cand_name,transaction_amt), y=transaction_amt, fill=transaction_tp))+
 geom_bar(stat='identity')+
   scale_fill_manual(values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" ))+
   scale_y_continuous(breaks = c(0,500000, 1000000), labels = c("0", "500,000", "1,000,000")) +
@@ -118,7 +120,7 @@ geom_bar(stat='identity')+
        fill = "Transaction Type") +
   ylab("Transaction Amount ($)")+
   xlab("Candidate Name")+
-   theme(legend.position=c(0.8, 0.8))+
+   theme(legend.position=c(0.8, 0.2))+
   coord_flip()
 ```
 
@@ -154,7 +156,7 @@ labs(title = "Nevada's Distribution of Campaign Money")+
     
 ```{r}
 # NV contributions by candidate
-ggplot(data = nv_money, aes(x= cand_name, y=transaction_amt, fill=transaction_tp))+
+ggplot(data = nv_money, aes(x=reorder(cand_name,transaction_amt), y=transaction_amt, fill=transaction_tp))+
   geom_bar(stat='identity') +
   scale_fill_manual(values = c("24A"="indianred1","24E"="seagreen1"), labels = c("24A (opposing)", "24E (supporting)" ))+
   scale_y_continuous(breaks = c(0, 10000000, 20000000, 30000000, 40000000), labels = c("0", "10,000,000", "20,000,000", "30,000,000", "40,000,000")) +

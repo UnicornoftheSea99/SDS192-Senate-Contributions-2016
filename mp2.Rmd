@@ -61,6 +61,8 @@ What role do contributions play in senate elections?  With the following data, w
 
 Our code can be found on GitHub.^[github]
 
+![Senate 2016](senate2016.png)
+
 [ˆ1]:[California 2016 Senate Elections]( https://ballotpedia.org/United_States_Senate_election_in_California,_2016#cite_note-6)
 [ˆ2]: [Nevada 2016 Senate Elections](https://ballotpedia.org/United_States_Senate_election_in_Nevada,_2016)
 [^github]: [our GitHub repository](https://github.com/sds192-i21/mp2-pacific-a)
@@ -79,10 +81,11 @@ library(fec16)
 To get the full `contributions` table, run this:
 
 ```{r, eval=TRUE}
-#contributions_all <- read_all_contributions()
+contributions_all <- read_all_contributions()
 ```
 
 ## California Election
+![California Senate Candidates Kamala Harris and Loretta Sanchez](calicands.jpg)
 
 ```{r}
 # filter for CA senate candidates
@@ -124,6 +127,7 @@ geom_bar(stat='identity')+
 Kamala Harris and Loretta Sanchez are Democrats while George Sundheim and Thomas Del Becarro are Republicans.
 
 ## Nevada Election
+![Nevada Senate Candidates Catherine Cortez Masto and Joe Heck ](nevadacands.png)
 
 ```{r}
 # filter Senate candidates from Nevada
@@ -213,3 +217,5 @@ In this assignment, we attempted the following [standards](https://beanumber.git
 - [https://stackoverflow.com/questions/61068031/error-stat-count-can-only-have-an-x-or-y-aesthetic](https://stackoverflow.com/questions/61068031/error-stat-count-can-only-have-an-x-or-y-aesthetic)
 - [http://www.sthda.com/english/wiki/ggplot2-axis-scales-and-transformations](http://www.sthda.com/english/wiki/ggplot2-axis-scales-and-transformations)
 - [https://stackoverflow.com/questions/38788357/change-bar-plot-colour-in-geom-bar-with-ggplot2-in-r](https://stackoverflow.com/questions/38788357/change-bar-plot-colour-in-geom-bar-with-ggplot2-in-r)
+-[https://www.rgj.com/story/news/politics/2016/10/11/heck-and-cortez-masto-outspent-outside-groups/91747818/](https://www.rgj.com/story/news/politics/2016/10/11/heck-and-cortez-masto-outspent-outside-groups/91747818/)
+-[https://ktla.com/news/politics/california-u-s-senate-election-results-kamala-harris-projected-to-win/](https://ktla.com/news/politics/california-u-s-senate-election-results-kamala-harris-projected-to-win/)
